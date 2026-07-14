@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+<!-- ebook-optimized:v1 -->
 <meta charset="utf-8">
 <title>Java基础知识复习 & 真题 · 尚硅谷 · 宋红康</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -238,6 +239,27 @@ hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
   }
   .backdrop.show { display: block; }
 }
+
+/* --- ebook-optimized:v1 --- */
+.chapter {
+  content-visibility: auto;
+  contain-intrinsic-size: 900px 5000px;
+  contain: layout style paint;
+}
+.chapter + .chapter { margin-top: 24px; }
+/* Big code blocks are the single largest layout cost; let the browser skip them
+   until they're near the viewport. */
+pre {
+  content-visibility: auto;
+  contain-intrinsic-size: 800px 240px;
+}
+/* Give images a reasonable placeholder height so lazy-loaded ones don't cause
+   layout jumps when scrolling. */
+img { min-height: 40px; background: transparent; }
+img[data-loading="1"] { background: linear-gradient(90deg, rgba(127,127,127,.08), rgba(127,127,127,.16), rgba(127,127,127,.08)); }
+/* When a hash target is inside a hidden chapter, force it visible so
+   scrollIntoView / anchor jumps still work. */
+.chapter.force-visible { content-visibility: visible; }
 </style>
 </head>
 <body>
@@ -348,12 +370,14 @@ hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
   </aside>
   <div id="backdrop" class="backdrop"></div>
   <main id="content" class="content">
-    <div class="content-inner">
-      <h1 id="java">Java基础知识复习 &amp; 真题（尚硅谷·宋红康）</h1>
+    <div class="content-inner"><section class="chapter" data-ch="1">
+<h1 id="java">Java基础知识复习 &amp; 真题（尚硅谷·宋红康）</h1>
 <blockquote>
 <p>本电子书由 18 章「随堂复习与企业真题」Markdown 合并生成。所有原始 <code>images/</code> 路径已重写至 <code>assets/images/</code>。</p>
 </blockquote>
 <p><a id="第01章-Java语言概述"></a></p>
+</section>
+<section class="chapter" data-ch="2">
 <h1 id="01-java">第01章 Java语言概述</h1>
 <hr />
 <h3 id="_1">一、随堂复习</h3>
@@ -609,8 +633,10 @@ System.out.print() : 输出数据之后，不会换行。
 <p>存在！</p>
 <p>不能举例。</p>
 <h4 id="5-java">5. 如何看待Java是一门半编译半解释型的语言（携*）</h4>
-<p><img alt="img" src="assets/images/image002.jpg" /></p>
+<p><img alt="img" src="assets/images/image002.jpg" / loading="lazy" decoding="async" fetchpriority="low"></p>
 <p><a id="第02章-变量与运算符"></a></p>
+</section>
+<section class="chapter" data-ch="3">
 <h1 id="02">第02章 变量与运算符</h1>
 <hr />
 <h3 id="_3">一、随堂复习</h3>
@@ -1772,6 +1798,8 @@ System.out.print() : 输出数据之后，不会换行。
 <p><strong>对于小数，并不能做到“每个小数都有对应的二进制数字”</strong>。举例来说，二进制小数0.0001表示十进制数0.0625 （至于它是如何计算的，不用深究）；二进制小数0.0010表示十进制数0.125；二进制小数0.0011表示十进制数0.1875。看，对于四位的二进制小数，二进制小数虽然是连贯的，但是十进制小数却不是连贯的。比如，你无法用四位二进制小数的形式表示0.125 ~ 0.1875之间的十进制小数。</p>
 <p>所以在编程中，遇见小数判断相等情况，比如开发银行、交易等系统，可以采用<code>四舍五入</code>或者“<code>同乘同除</code>”等方式进行验证，避免上述问题。</p>
 <p><a id="第03章-流程控制语句"></a></p>
+</section>
+<section class="chapter" data-ch="4">
 <h1 id="03">第03章 流程控制语句</h1>
 <hr />
 <h3 id="_5">一、随堂复习</h3>
@@ -3237,6 +3265,8 @@ System.out.print() : 输出数据之后，不会换行。
 <li>do-while至少会执行一次。</li>
 </ul>
 <p><a id="第04章-IDEA的安装与使用"></a></p>
+</section>
+<section class="chapter" data-ch="5">
 <h1 id="04-idea">第04章 IDEA的安装与使用</h1>
 <hr />
 <h3 id="_24">一、随堂复习</h3>
@@ -3258,9 +3288,9 @@ System.out.print() : 输出数据之后，不会换行。
 <li>了解：如何删除模块</li>
 </ul>
 <h4 id="4-jdk">4. 熟悉JDK的结构</h4>
-<p><img alt="image-20221115165103208" src="assets/images/image-20221115165103208.png" /></p>
-<p><img alt="image-20221115165123046" src="assets/images/image-20221115165123046.png" /></p>
-<p><img alt="image-20221115165138209" src="assets/images/image-20221115165138209.png" /></p>
+<p><img alt="image-20221115165103208" src="assets/images/image-20221115165103208.png" / loading="lazy" decoding="async" fetchpriority="low"></p>
+<p><img alt="image-20221115165123046" src="assets/images/image-20221115165123046.png" / loading="lazy" decoding="async" fetchpriority="low"></p>
+<p><img alt="image-20221115165138209" src="assets/images/image-20221115165138209.png" / loading="lazy" decoding="async" fetchpriority="low"></p>
 <h4 id="5">5. 详细的设置</h4>
 <p>略</p>
 <h4 id="6-debug">6. 代码模板、快捷键、调试程序（debug）</h4>
@@ -3271,6 +3301,8 @@ System.out.print() : 输出数据之后，不会换行。
 <h4 id="2-eclipseidea">2. 谈谈你对Eclipse和IDEA使用上的感受？</h4>
 <p>Eclipse不够人性化。</p>
 <p><a id="第05章-数组"></a></p>
+</section>
+<section class="chapter" data-ch="6">
 <h1 id="05">第05章 数组</h1>
 <hr />
 <h3 id="_26">一、随堂复习</h3>
@@ -3397,6 +3429,8 @@ System.out.print() : 输出数据之后，不会换行。
 <h4 id="8-arrays">8. Arrays 类的排序方法是什么？如何实现排序的？（阿*、阿*校招）</h4>
 <p>略</p>
 <p><a id="第06章-面向对象-基础"></a></p>
+</section>
+<section class="chapter" data-ch="7">
 <h1 id="06-">第06章 面向对象-基础</h1>
 <hr />
 <h3 id="_28">一、随堂复习</h3>
@@ -3555,6 +3589,8 @@ System.out.print() : 输出数据之后，不会换行。
 <p>变量显式赋值先于构造器中的赋值。</p>
 <p>如何证明？我看的字节码文件。</p>
 <p><a id="第07章-面向对象-进阶"></a></p>
+</section>
+<section class="chapter" data-ch="8">
 <h1 id="07-">第07章 面向对象-进阶</h1>
 <hr />
 <h3 id="_30">一、随堂复习</h3>
@@ -3695,6 +3731,8 @@ System.out.print() : 输出数据之后，不会换行。
 </code></pre></div>
 
 <p><a id="第08章-面向对象-高级"></a></p>
+</section>
+<section class="chapter" data-ch="9">
 <h1 id="08-">第08章 面向对象-高级</h1>
 <hr />
 <h3 id="_32">一、随堂复习</h3>
@@ -3913,6 +3951,8 @@ System.out.print() : 输出数据之后，不会换行。
 </code></pre></div>
 
 <p><a id="第09章-异常处理"></a></p>
+</section>
+<section class="chapter" data-ch="10">
 <h1 id="09">第09章 异常处理</h1>
 <hr />
 <h3 id="_34">一、随堂复习</h3>
@@ -4139,6 +4179,8 @@ throws:使用在方法的声明处，&quot;throws 异常类1,异常类2,...&quot
 <h5 id="1_15">1. 如何自定义一个异常？（*软国际）</h5>
 <p>略</p>
 <p><a id="第10章-多线程"></a></p>
+</section>
+<section class="chapter" data-ch="11">
 <h1 id="10_1">第10章 多线程</h1>
 <hr />
 <h3 id="_36">一、随堂复习</h3>
@@ -4201,7 +4243,7 @@ Thread类内部声明的三个常量：
 
 <p>线程的生命周期：</p>
 <p>jdk5.0之前：</p>
-<p><img alt="image-20221203142900528" src="assets/images/image-20221203142900528.png" /></p>
+<p><img alt="image-20221203142900528" src="assets/images/image-20221203142900528.png" / loading="lazy" decoding="async" fetchpriority="low"></p>
 <p>jdk5.0及之后：Thread类中定义了一个内部类State</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">State</span><span class="w"> </span><span class="p">{</span>
 
@@ -4219,7 +4261,7 @@ Thread类内部声明的三个常量：
 <span class="p">}</span>
 </code></pre></div>
 
-<p><img alt="image-20221203143046926" src="assets/images/image-20221203143046926.png" /></p>
+<p><img alt="image-20221203143046926" src="assets/images/image-20221203143046926.png" / loading="lazy" decoding="async" fetchpriority="low"></p>
 <h4 id="4_7">4. 如何解决线程安全问题(重点、难点)</h4>
 <ul>
 <li>
@@ -4439,6 +4481,8 @@ notifyAll():一旦执行此方法，就会唤醒所有被wait的线程。
 
 <p>同上。</p>
 <p><a id="第11章-常用类与基础API"></a></p>
+</section>
+<section class="chapter" data-ch="12">
 <h1 id="11-api">第11章 常用类与基础API</h1>
 <hr />
 <h3 id="_38">一、随堂复习</h3>
@@ -4545,6 +4589,8 @@ notifyAll():一旦执行此方法，就会唤醒所有被wait的线程。
 <h5 id="2-comparable-comparator">2. Comparable 接口和 Comparator 接口实现比较（阿*）</h5>
 <p>略</p>
 <p><a id="第12章-集合框架"></a></p>
+</section>
+<section class="chapter" data-ch="13">
 <h1 id="12_1">第12章 集合框架</h1>
 <hr />
 <h3 id="_40">一、随堂复习</h3>
@@ -4914,6 +4960,8 @@ Collections：用于操作集合框架的一个工具类。此时的集合框架
 
 <p>略</p>
 <p><a id="第13章-泛型"></a></p>
+</section>
+<section class="chapter" data-ch="14">
 <h1 id="13_1">第13章 泛型</h1>
 <hr />
 <h3 id="_42">一、随堂复习</h3>
@@ -4967,6 +5015,8 @@ Collections：用于操作集合框架的一个工具类。此时的集合框架
 <h5 id="2_21">2. 说说你对泛型的了解（*软国际）</h5>
 <p>略</p>
 <p><a id="第14章-数据结构与集合源码"></a></p>
+</section>
+<section class="chapter" data-ch="15">
 <h1 id="14_1">第14章 数据结构与集合源码</h1>
 <hr />
 <h3 id="_44">一、随堂复习</h3>
@@ -5130,6 +5180,8 @@ Collections：用于操作集合框架的一个工具类。此时的集合框架
 
 <p>自然排序、定制排序。</p>
 <p><a id="第15章-File类与IO流"></a></p>
+</section>
+<section class="chapter" data-ch="16">
 <h1 id="15-fileio">第15章 File类与IO流</h1>
 <hr />
 <h3 id="_46">一、随堂复习</h3>
@@ -5202,7 +5254,7 @@ Collections：用于操作集合框架的一个工具类。此时的集合框架
 <p>作用：减少与磁盘的交互，进而提升读写效率。</p>
 <h4 id="23_3">2.3 转换流</h4>
 <h5 id="1_25">1. 字节流和字符流是什么？怎么转换？(北京蓝*、*海*供应链管理）</h5>
-<p><img alt="image-20221212161251100" src="assets/images/image-20221212161251100.png" /></p>
+<p><img alt="image-20221212161251100" src="assets/images/image-20221212161251100.png" / loading="lazy" decoding="async" fetchpriority="low"></p>
 <h4 id="24_6">2.4 序列化</h4>
 <h5 id="1-java_6">1. 什么是Java序列化，如何实现(君*科技、上海*厦物联网)</h5>
 <div class="codehilite"><pre><span></span><code>对象序列化机制允许把内存中的Java对象转换成平台无关的二进制流，从而允许把这种二进制流持久地保存在磁盘上，
@@ -5212,6 +5264,8 @@ Collections：用于操作集合框架的一个工具类。此时的集合框架
 <h5 id="2-javaserializable">2. Java有些类中为什么需要实现Serializable接口？（阿*校招）</h5>
 <p>便于此类的对象实现序列化操作。</p>
 <p><a id="第16章-网络编程"></a></p>
+</section>
+<section class="chapter" data-ch="17">
 <h1 id="16">第16章 网络编程</h1>
 <hr />
 <h3 id="_48">一、随堂复习</h3>
@@ -5282,6 +5336,8 @@ Collections：用于操作集合框架的一个工具类。此时的集合框架
 <h5 id="2-tcp">2. 简单说说TCP协议的三次握手与四次挥手机制 （*科软）</h5>
 <p>略</p>
 <p><a id="第17章-反射机制"></a></p>
+</section>
+<section class="chapter" data-ch="18">
 <h1 id="17_2">第17章 反射机制</h1>
 <hr />
 <h3 id="_50">一、随堂复习</h3>
@@ -5524,7 +5580,7 @@ System.out.println(per);
 &gt; 除了使用new创建对象之外，还可以用什么方法创建对象？(*云网络)
 </code></pre></div>
 
-<p><img alt="image-20221214145240412" src="assets/images/image-20221214145240412.png" /></p>
+<p><img alt="image-20221214145240412" src="assets/images/image-20221214145240412.png" / loading="lazy" decoding="async" fetchpriority="low"></p>
 <h5 id="2_25">2. 如何找到对象实际类的？（*度）</h5>
 <p>对象.getClass();</p>
 <div class="codehilite"><pre><span></span><code>Object obj = new Date();
@@ -5556,6 +5612,8 @@ obj.getClass();// 获取到的是Date。
 </code></pre></div>
 
 <p><a id="第18章-JDK8-17新特性"></a></p>
+</section>
+<section class="chapter" data-ch="19">
 <h1 id="18-jdk8-17">第18章 JDK8-17新特性</h1>
 <hr />
 <h3 id="_52">一、随堂复习</h3>
@@ -5676,7 +5734,8 @@ obj.getClass();// 获取到的是Date。
 <h4 id="24_8">2.4 其它版本新特性</h4>
 <h5 id="1-jdk15jdk16jdk17">1. 说说JDK15、JDK16、JDK17中的新特性都有什么？(银*数据)</h5>
 <p>略</p>
-    </div>
+</section>
+</div>
   </main>
 </div>
 <button id="to-top" title="回到顶部">↑ 顶部</button>
@@ -5810,6 +5869,50 @@ obj.getClass();// 获取到的是Date。
     const firstLink = toc.querySelector('a[href^="#"]');
     if (firstLink) setActive(firstLink);
   }
+})();
+</script>
+<script>
+/* --- ebook-optimized:v1 --- */
+(function() {
+  // 1) Force the chapter containing the URL hash to be visible for anchor jumps.
+  function reveal(id) {
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    const ch = el.closest('.chapter');
+    if (ch) ch.classList.add('force-visible');
+  }
+  reveal(decodeURIComponent(location.hash.slice(1)));
+  window.addEventListener('hashchange', () => reveal(decodeURIComponent(location.hash.slice(1))));
+
+  // 2) Also reveal the target chapter when a TOC link is clicked, BEFORE the smooth scroll.
+  const toc = document.getElementById('toc');
+  if (toc) {
+    toc.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href^="#"]');
+      if (!link) return;
+      reveal(decodeURIComponent(link.getAttribute('href').slice(1)));
+    }, true /* capture: run before the existing handler */);
+  }
+
+  // 3) Progressively reveal chapters near the viewport so anchor offsets are
+  //    computed correctly for scroll-spy.
+  const content = document.getElementById('content');
+  const chapters = Array.from(document.querySelectorAll('.chapter'));
+  if ('IntersectionObserver' in window && chapters.length && content) {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) if (e.isIntersecting) e.target.classList.add('force-visible');
+    }, { root: content, rootMargin: '400px 0px 400px 0px', threshold: 0 });
+    chapters.forEach(c => io.observe(c));
+  }
+
+  // 4) Fade image background once loaded (visual polish).
+  document.querySelectorAll('img').forEach(img => {
+    if (img.complete) { img.removeAttribute('data-loading'); return; }
+    img.setAttribute('data-loading', '1');
+    img.addEventListener('load', () => img.removeAttribute('data-loading'), { once: true });
+    img.addEventListener('error', () => img.removeAttribute('data-loading'), { once: true });
+  });
 })();
 </script>
 </body>
