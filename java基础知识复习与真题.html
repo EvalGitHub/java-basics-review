@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<!-- ebook-optimized:v3 -->
+<!-- ebook-optimized:v5 -->
 <meta charset="utf-8">
 <title>Java基础知识复习 & 真题 · 尚硅谷 · 宋红康</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -5110,7 +5110,7 @@ Collections：用于操作集合框架的一个工具类。此时的集合框架
 <h3 id="_42">一、随堂复习</h3>
 <h4 id="1_22">1. 泛型的理解</h4>
 <ul>
-<li><E> ，泛型参数，使用引用数据类型来赋值。</li>
+<li>&lt;E> ，泛型参数，使用引用数据类型来赋值。</li>
 </ul>
 <h4 id="2_20">2. 泛型在集合、比较器中的使用（重点）</h4>
 <ul>
@@ -5119,8 +5119,8 @@ Collections：用于操作集合框架的一个工具类。此时的集合框架
 </ul>
 <h4 id="3_11">3. 自定义泛型类/泛型接口、泛型方法（熟悉）</h4>
 <ul>
-<li>class Order<T>{ }</li>
-<li>public <E> 返回值类型 方法名(形参列表){}</li>
+<li>class Order&lt;T>{ }</li>
+<li>public &lt;E> 返回值类型 方法名(形参列表){}</li>
 <li>具体的细节，见IDEA中的笔记。</li>
 </ul>
 <h4 id="4_11">4. 泛型在继承上的体现</h4>
@@ -5555,8 +5555,8 @@ Collections：用于操作集合框架的一个工具类。此时的集合框架
 解析(Resolve):虚拟机常量池内的符号引用（常量名）替换为直接引用（地址）的过程。</p>
 </blockquote>
 <p>过程3：初始化(initialization)
-  执行类构造器<clinit>()方法的过程。
-  类构造器<clinit>()方法是由编译期自动收集类中所有类变量的赋值动作和静态代码块中的语句合并产生的。
+  执行类构造器&lt;clinit>()方法的过程。
+  类构造器&lt;clinit>()方法是由编译期自动收集类中所有类变量的赋值动作和静态代码块中的语句合并产生的。
   ```</p>
 <ul>
 <li>类的加载器</li>
@@ -5711,7 +5711,7 @@ System.out.println(per);
 <h5 id="1-classclass">1. Class类的作用？生成Class对象的方法有哪些？(顺*)</h5>
 <p>反射的源头。 主要有三种。</p>
 <h5 id="2-classforname">2. Class.forName("全路径") 会调用哪些方法 ？ 会调用构造方法吗？加载的类会放在哪？（上*银行外包）</h5>
-<p>Class.forName() 会执行执行类构造器<clinit>()方法。</p>
+<p>Class.forName() 会执行执行类构造器&lt;clinit>()方法。</p>
 <p>不会调用构造方法</p>
 <p>加载的类放在方法区。</p>
 <h4 id="23_4">2.3 类的加载</h4>
@@ -5857,10 +5857,10 @@ obj.getClass();// 获取到的是Date。
 <h5 id="2_26">2. 什么是函数式接口？有几种函数式接口（阿**巴）</h5>
 <p>略。</p>
 <p>java.util.function包下定义了丰富的好函数式接口。有4类基础的函数式接口：</p>
-<p>消费型接口：Consumer<T>     void accept(T t)
-供给型接口：Supplier<T>     T get()
+<p>消费型接口：Consumer&lt;T>     void accept(T t)
+供给型接口：Supplier&lt;T>     T get()
 函数型接口：Function<T,R>   R apply(T t)
-判断型接口：Predicate<T>    boolean test(T t)</p>
+判断型接口：Predicate&lt;T>    boolean test(T t)</p>
 <h4 id="23-stream-api">2.3 Stream API</h4>
 <h5 id="1-stream">1. 创建Stream的方式（阿**巴）</h5>
 <p>三种。</p>
