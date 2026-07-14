@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<!-- ebook-optimized:v1 -->
+<!-- ebook-optimized:v3 -->
 <meta charset="utf-8">
 <title>Java基础知识复习 & 真题 · 尚硅谷 · 宋红康</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -240,26 +240,169 @@ hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
   .backdrop.show { display: block; }
 }
 
-/* --- ebook-optimized:v1 --- */
-.chapter {
-  content-visibility: auto;
-  contain-intrinsic-size: 900px 5000px;
-  contain: layout style paint;
+/* --- ebook-optimized:v3: one chapter at a time --- */
+.chapter { display: none; }
+.chapter.active { display: block; }
+/* Placeholder shown when no chapter has been chosen yet (first load, no hash) */
+.ebook-hint {
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 2;
 }
-.chapter + .chapter { margin-top: 24px; }
-/* Big code blocks are the single largest layout cost; let the browser skip them
-   until they're near the viewport. */
-pre {
-  content-visibility: auto;
-  contain-intrinsic-size: 800px 240px;
+.ebook-hint .big {
+  font-size: 18px;
+  color: var(--fg);
+  font-weight: 600;
+  margin-bottom: 8px;
 }
-/* Give images a reasonable placeholder height so lazy-loaded ones don't cause
-   layout jumps when scrolling. */
+
+/* Chapter nav bar (prev/next) at the bottom of the active chapter */
+.chapter-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 48px 0 0;
+  padding: 20px 0 8px;
+  border-top: 1px solid var(--border);
+}
+.chapter-nav button {
+  background: var(--panel);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  max-width: 45%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.chapter-nav button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.chapter-nav button:disabled { opacity: .35; cursor: not-allowed; }
+.chapter-nav .label { color: var(--muted); font-size: 11px; margin-right: 4px; }
+
+/* Image polish */
 img { min-height: 40px; background: transparent; }
-img[data-loading="1"] { background: linear-gradient(90deg, rgba(127,127,127,.08), rgba(127,127,127,.16), rgba(127,127,127,.08)); }
-/* When a hash target is inside a hidden chapter, force it visible so
-   scrollIntoView / anchor jumps still work. */
-.chapter.force-visible { content-visibility: visible; }
+img[data-loading="1"] {
+  background: linear-gradient(90deg, rgba(127,127,127,.08), rgba(127,127,127,.16), rgba(127,127,127,.08));
+}
+
+/* Show a small "currently viewing chapter X" indicator in topbar */
+.chapter-indicator {
+  color: var(--muted);
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+/* --- Global content search (sidebar panel) --- */
+.sidebar .search .search-mode {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+  font-size: 11px;
+}
+.sidebar .search .search-mode button {
+  flex: 1;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 3px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+}
+.sidebar .search .search-mode button.active {
+  background: var(--accent-bg);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.search-results { padding: 4px 6px 20px; display: none; }
+.search-results.show { display: block; }
+.search-results .summary {
+  font-size: 12px;
+  color: var(--muted);
+  padding: 6px 4px 10px;
+}
+.search-results .summary strong { color: var(--fg); }
+.search-results .result {
+  display: block;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--fg);
+  transition: border-color .15s ease;
+}
+.search-results .result:hover {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+.search-results .result .r-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--fg);
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.search-results .result .r-count {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.search-results .result .r-snip {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.search-results .result .r-snip mark {
+  background: rgba(255,215,0,.4);
+  color: inherit;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+.search-results .empty {
+  padding: 20px 8px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+@media (prefers-color-scheme: dark) {
+  .search-results .result { background: var(--panel); }
+  .search-results .result .r-snip mark { background: rgba(255,215,0,.3); }
+}
+
+/* When search mode is active, hide the TOC listing */
+.sidebar[data-mode="search"] .toc { display: none; }
+.sidebar[data-mode="toc"] .search-results { display: none; }
+
+/* In-content highlight for the active search term */
+.content mark.search-hit {
+  background: rgba(255,215,0,.55);
+  color: inherit;
+  padding: 0 1px;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(200,150,0,.4) inset;
+}
+.content mark.search-hit.current {
+  background: #ff9800;
+  color: #fff;
+  box-shadow: 0 0 0 2px rgba(255,152,0,.4);
+}
 </style>
 </head>
 <body>
@@ -5872,41 +6015,403 @@ obj.getClass();// 获取到的是Date。
 })();
 </script>
 <script>
-/* --- ebook-optimized:v1 --- */
+/* --- ebook-optimized:v3: chapter-on-demand + full-text search --- */
 (function() {
-  // 1) Force the chapter containing the URL hash to be visible for anchor jumps.
-  function reveal(id) {
-    if (!id) return;
-    const el = document.getElementById(id);
-    if (!el) return;
-    const ch = el.closest('.chapter');
-    if (ch) ch.classList.add('force-visible');
-  }
-  reveal(decodeURIComponent(location.hash.slice(1)));
-  window.addEventListener('hashchange', () => reveal(decodeURIComponent(location.hash.slice(1))));
-
-  // 2) Also reveal the target chapter when a TOC link is clicked, BEFORE the smooth scroll.
+  const content = document.getElementById('content');
+  const contentInner = document.querySelector('.content-inner');
   const toc = document.getElementById('toc');
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.getElementById('backdrop');
+  const search = document.getElementById('toc-search');
+  const topBarMeta = document.querySelector('.topbar .meta');
+  const chapters = Array.from(document.querySelectorAll('.chapter'));
+
+  if (!chapters.length) return;
+
+  /* ---------- Build indexes ---------- */
+  // Chapter title: prefer first h1 inside; fallback to data-ch
+  const chapterInfo = chapters.map((ch, i) => {
+    const h1 = ch.querySelector('h1');
+    const title = h1 ? h1.textContent.trim() : `第 ${i+1} 部分`;
+    return { el: ch, index: i, title, plain: null };
+  });
+  // Every heading id -> chapter index
+  const idToChapter = new Map();
+  chapters.forEach((ch, i) => {
+    ch.querySelectorAll('[id]').forEach(el => idToChapter.set(el.id, i));
+  });
+
+  /* ---------- Chapter switching ---------- */
+  function setActiveChapter(i, targetId, updateHash) {
+    if (i < 0 || i >= chapters.length) return;
+    chapters.forEach((ch, idx) => ch.classList.toggle('active', idx === i));
+
+    // Update sidebar highlight (auto-open containing top-level li)
+    if (toc) {
+      toc.querySelectorAll('a.active').forEach(a => a.classList.remove('active'));
+      toc.querySelectorAll('li.open').forEach(li => li.classList.remove('open'));
+      const anchorId = targetId || chapterInfo[i].el.querySelector('[id]')?.id;
+      if (anchorId) {
+        const link = toc.querySelector(`a[href="#${CSS.escape(anchorId)}"]`);
+        if (link) {
+          link.classList.add('active');
+          let li = link.closest('li');
+          while (li && li !== toc) {
+            li.classList.add('open');
+            li = li.parentElement?.closest('li');
+          }
+          link.scrollIntoView({ block: 'nearest' });
+        }
+      }
+    }
+
+    // Scroll top: to targetId inside chapter, else to top of content
+    requestAnimationFrame(() => {
+      if (targetId) {
+        const el = document.getElementById(targetId);
+        if (el) {
+          const y = el.getBoundingClientRect().top - content.getBoundingClientRect().top + content.scrollTop - 12;
+          content.scrollTo({ top: y, behavior: 'auto' });
+          return;
+        }
+      }
+      content.scrollTo({ top: 0, behavior: 'auto' });
+    });
+
+    // Update hash
+    if (updateHash) {
+      const id = targetId || chapterInfo[i].el.querySelector('[id]')?.id;
+      if (id) history.replaceState(null, '', '#' + id);
+    }
+
+    // Update topbar indicator
+    if (topBarMeta) topBarMeta.textContent = `${i+1} / ${chapters.length} · ${chapterInfo[i].title}`;
+
+    // Ensure chapter-nav exists at bottom
+    ensureChapterNav(i);
+
+    // Close mobile drawer
+    if (window.innerWidth <= 900) {
+      sidebar?.classList.remove('open');
+      backdrop?.classList.remove('show');
+    }
+  }
+
+  function ensureChapterNav(i) {
+    const ch = chapters[i];
+    let nav = ch.querySelector(':scope > .chapter-nav');
+    if (!nav) {
+      nav = document.createElement('div');
+      nav.className = 'chapter-nav';
+      nav.innerHTML = `
+        <button data-nav="prev"><span class="label">上一章</span><span class="ct"></span></button>
+        <button data-nav="next"><span class="label">下一章</span><span class="ct"></span></button>
+      `;
+      ch.appendChild(nav);
+    }
+    const prev = nav.querySelector('[data-nav="prev"]');
+    const next = nav.querySelector('[data-nav="next"]');
+    prev.disabled = i === 0;
+    next.disabled = i === chapters.length - 1;
+    prev.querySelector('.ct').textContent = i > 0 ? chapterInfo[i-1].title : '';
+    next.querySelector('.ct').textContent = i < chapters.length-1 ? chapterInfo[i+1].title : '';
+    prev.onclick = () => setActiveChapter(i-1, null, true);
+    next.onclick = () => setActiveChapter(i+1, null, true);
+  }
+
+  /* ---------- Sidebar mode ---------- */
+  function setSidebarMode(mode) { sidebar?.setAttribute('data-mode', mode); }
+  setSidebarMode('toc');
+
+  /* ---------- TOC clicks (intercept in capture phase, disable old handler) ---------- */
   if (toc) {
+    const originalToc = toc;
+    // Remove old click listeners by cloning would kill everything;
+    // instead intercept in capture and stop propagation
     toc.addEventListener('click', (e) => {
       const link = e.target.closest('a[href^="#"]');
       if (!link) return;
-      reveal(decodeURIComponent(link.getAttribute('href').slice(1)));
-    }, true /* capture: run before the existing handler */);
+      e.preventDefault();
+      e.stopPropagation();
+      const id = decodeURIComponent(link.getAttribute('href').slice(1));
+      const chIndex = idToChapter.get(id);
+      if (chIndex == null) return;
+      setActiveChapter(chIndex, id, true);
+    }, true);
   }
 
-  // 3) Progressively reveal chapters near the viewport so anchor offsets are
-  //    computed correctly for scroll-spy.
-  const content = document.getElementById('content');
-  const chapters = Array.from(document.querySelectorAll('.chapter'));
-  if ('IntersectionObserver' in window && chapters.length && content) {
-    const io = new IntersectionObserver((entries) => {
-      for (const e of entries) if (e.isIntersecting) e.target.classList.add('force-visible');
-    }, { root: content, rootMargin: '400px 0px 400px 0px', threshold: 0 });
-    chapters.forEach(c => io.observe(c));
+  /* ---------- Hash routing ---------- */
+  window.addEventListener('hashchange', () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    const chIndex = idToChapter.get(id);
+    if (chIndex != null) setActiveChapter(chIndex, id, false);
+  });
+
+  /* ---------- Initial state ---------- */
+  const initHash = decodeURIComponent(location.hash.slice(1));
+  if (initHash && idToChapter.has(initHash)) {
+    setActiveChapter(idToChapter.get(initHash), initHash, false);
+  } else {
+    // Show a welcome hint instead of auto-loading chapter 1
+    const hint = document.createElement('div');
+    hint.className = 'ebook-hint';
+    hint.innerHTML = `
+      <div class="big">📖 请从左侧选择章节开始阅读</div>
+      <div>点击目录中的章节标题即可加载对应内容</div>
+      <div>顶部搜索框输入关键词可全文检索</div>
+    `;
+    contentInner.insertBefore(hint, contentInner.firstChild);
+    // Also show chapter 1 by default? -> keep hint; user can click chapter 1.
+    if (topBarMeta) topBarMeta.textContent = `共 ${chapters.length} 章`;
   }
 
-  // 4) Fade image background once loaded (visual polish).
+  /* ---------- Global content search ---------- */
+  // Build plain-text index lazily (one pass)
+  function buildPlainIndex() {
+    chapterInfo.forEach(info => {
+      if (info.plain !== null) return;
+      // Use innerText to get rendered text without HTML tags; strip excessive whitespace
+      info.plain = info.el.innerText.replace(/\s+/g, ' ');
+      info.plainLower = info.plain.toLowerCase();
+    });
+  }
+
+  // Search-results panel
+  let resultsPanel = document.getElementById('search-results');
+  if (!resultsPanel) {
+    resultsPanel = document.createElement('div');
+    resultsPanel.id = 'search-results';
+    resultsPanel.className = 'search-results';
+    // Insert after .search inside sidebar
+    const searchBox = sidebar.querySelector('.search');
+    searchBox.insertAdjacentElement('afterend', resultsPanel);
+  }
+
+  // Add mode toggle (target: 目录 / 全文)
+  const searchBox = sidebar.querySelector('.search');
+  let modeToggle = searchBox.querySelector('.search-mode');
+  if (!modeToggle) {
+    modeToggle = document.createElement('div');
+    modeToggle.className = 'search-mode';
+    modeToggle.innerHTML = `
+      <button data-scope="toc" class="active">目录</button>
+      <button data-scope="content">全文</button>
+    `;
+    searchBox.appendChild(modeToggle);
+  }
+  let scope = 'toc';
+  modeToggle.addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    scope = btn.dataset.scope;
+    modeToggle.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+    // Re-run current query
+    onSearchInput();
+    // Change placeholder
+    search.placeholder = scope === 'toc' ? '搜索目录...' : '全文检索（输入回车或至少 2 字）';
+  });
+
+  // Highlight text nodes inside an element with the given (lowercase) query.
+  function highlightIn(root, query) {
+    if (!query) return 0;
+    // Clear previous highlights first
+    unhighlightIn(root);
+    const q = query.toLowerCase();
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: (node) => {
+        if (!node.nodeValue || !node.nodeValue.toLowerCase().includes(q)) return NodeFilter.FILTER_REJECT;
+        // Skip inside <script>, <style>, and already-marked nodes
+        const p = node.parentElement;
+        if (!p) return NodeFilter.FILTER_REJECT;
+        const tag = p.tagName;
+        if (tag === 'SCRIPT' || tag === 'STYLE') return NodeFilter.FILTER_REJECT;
+        if (p.classList.contains('search-hit')) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    const targets = [];
+    let n;
+    while ((n = walker.nextNode())) targets.push(n);
+    let count = 0;
+    for (const node of targets) {
+      const text = node.nodeValue;
+      const lower = text.toLowerCase();
+      let idx = 0, last = 0;
+      const frag = document.createDocumentFragment();
+      while ((idx = lower.indexOf(q, last)) !== -1) {
+        if (idx > last) frag.appendChild(document.createTextNode(text.slice(last, idx)));
+        const mark = document.createElement('mark');
+        mark.className = 'search-hit';
+        mark.textContent = text.slice(idx, idx + q.length);
+        frag.appendChild(mark);
+        last = idx + q.length;
+        count++;
+      }
+      if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+      node.parentNode.replaceChild(frag, node);
+    }
+    return count;
+  }
+
+  function unhighlightIn(root) {
+    root.querySelectorAll('mark.search-hit').forEach(m => {
+      const parent = m.parentNode;
+      parent.replaceChild(document.createTextNode(m.textContent), m);
+      parent.normalize();
+    });
+  }
+
+  function clearAllHighlights() {
+    chapters.forEach(ch => unhighlightIn(ch));
+  }
+
+  function makeSnippet(text, query, radius) {
+    radius = radius || 40;
+    const lower = text.toLowerCase();
+    const q = query.toLowerCase();
+    const i = lower.indexOf(q);
+    if (i < 0) return '';
+    const start = Math.max(0, i - radius);
+    const end = Math.min(text.length, i + query.length + radius);
+    const before = (start > 0 ? '…' : '') + text.slice(start, i);
+    const hit = text.slice(i, i + query.length);
+    const after = text.slice(i + query.length, end) + (end < text.length ? '…' : '');
+    return escapeHtml(before) + '<mark>' + escapeHtml(hit) + '</mark>' + escapeHtml(after);
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  // Debounce helper
+  function debounce(fn, ms) {
+    let t;
+    return function(...args) { clearTimeout(t); t = setTimeout(() => fn.apply(this, args), ms); };
+  }
+
+  function tocFilter(q) {
+    const items = toc.querySelectorAll('li');
+    if (!q) { items.forEach(li => li.classList.remove('hidden')); return; }
+    items.forEach(li => li.classList.add('hidden'));
+    toc.querySelectorAll('a').forEach(a => {
+      if (a.textContent.toLowerCase().includes(q)) {
+        let li = a.closest('li'), cur = li;
+        while (cur && cur !== toc) {
+          cur.classList.remove('hidden');
+          cur.classList.add('open');
+          cur = cur.parentElement?.closest('li');
+        }
+        li.querySelectorAll('li').forEach(d => d.classList.remove('hidden'));
+      }
+    });
+  }
+
+  function contentSearch(q) {
+    resultsPanel.innerHTML = '';
+    if (!q || q.length < 2) {
+      resultsPanel.innerHTML = '<div class="empty">输入至少 2 个字符开始全文检索</div>';
+      return;
+    }
+    buildPlainIndex();
+    const ql = q.toLowerCase();
+    let totalHits = 0;
+    const hits = [];
+    for (const info of chapterInfo) {
+      let count = 0, from = 0, idx;
+      while ((idx = info.plainLower.indexOf(ql, from)) !== -1) {
+        count++; from = idx + ql.length;
+        if (count > 500) break;
+      }
+      if (count > 0) {
+        hits.push({ info, count });
+        totalHits += count;
+      }
+    }
+    // Summary
+    const summary = document.createElement('div');
+    summary.className = 'summary';
+    if (hits.length === 0) {
+      resultsPanel.innerHTML = `<div class="empty">未找到 “${escapeHtml(q)}”</div>`;
+      return;
+    }
+    summary.innerHTML = `找到 <strong>${totalHits}</strong> 处匹配，分布在 <strong>${hits.length}</strong> 个章节。<br>点击结果加载对应章节。`;
+    resultsPanel.appendChild(summary);
+
+    for (const h of hits) {
+      const card = document.createElement('a');
+      card.className = 'result';
+      card.href = '#' + (h.info.el.querySelector('[id]')?.id || '');
+      card.innerHTML = `
+        <div class="r-title">
+          <span>${escapeHtml(h.info.title)}</span>
+          <span class="r-count">${h.count} 处</span>
+        </div>
+        <div class="r-snip">${makeSnippet(h.info.plain, q, 40)}</div>
+      `;
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        loadSearchResult(h.info.index, q);
+      });
+      resultsPanel.appendChild(card);
+    }
+  }
+
+  function loadSearchResult(chapterIndex, query) {
+    // Clear previous highlights in other chapters
+    clearAllHighlights();
+    setActiveChapter(chapterIndex, null, true);
+    // Highlight matches in this chapter, then jump to first
+    const ch = chapters[chapterIndex];
+    requestAnimationFrame(() => {
+      highlightIn(ch, query);
+      const first = ch.querySelector('mark.search-hit');
+      if (first) {
+        first.classList.add('current');
+        first.scrollIntoView({ block: 'center', behavior: 'auto' });
+      }
+    });
+  }
+
+  const onSearchInput = () => {
+    const q = search.value.trim().toLowerCase();
+    if (scope === 'toc') {
+      setSidebarMode('toc');
+      tocFilter(q);
+    } else {
+      setSidebarMode('search');
+      contentSearch(q);
+    }
+  };
+
+  // Rewire search input (replace inherited handler)
+  const newSearch = search.cloneNode(true);
+  search.parentNode.replaceChild(newSearch, search);
+  const searchInput = newSearch;
+  searchInput.addEventListener('input', debounce(() => {
+    // read from fresh reference
+    const q = searchInput.value.trim();
+    if (scope === 'toc') {
+      setSidebarMode('toc');
+      tocFilter(q.toLowerCase());
+    } else {
+      setSidebarMode('search');
+      contentSearch(q);
+    }
+  }, 220));
+  // Also pressing Enter with content-mode should force run immediately
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && scope === 'content') {
+      contentSearch(searchInput.value.trim());
+    }
+    if (e.key === 'Escape') {
+      searchInput.value = '';
+      setSidebarMode('toc');
+      tocFilter('');
+      resultsPanel.innerHTML = '';
+    }
+  });
+
+  /* ---------- Image polish ---------- */
   document.querySelectorAll('img').forEach(img => {
     if (img.complete) { img.removeAttribute('data-loading'); return; }
     img.setAttribute('data-loading', '1');
