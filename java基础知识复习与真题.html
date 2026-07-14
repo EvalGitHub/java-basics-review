@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<!-- ebook-optimized:v5 -->
+<!-- ebook-optimized:v9 -->
 <meta charset="utf-8">
 <title>Java基础知识复习 & 真题 · 尚硅谷 · 宋红康</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -321,8 +321,16 @@ img[data-loading="1"] {
   border-color: var(--accent);
 }
 
-.search-results { padding: 4px 6px 20px; display: none; }
-.search-results.show { display: block; }
+.search-results {
+  padding: 4px 6px 20px;
+  display: none;
+  max-height: 60vh;
+  overflow-y: auto;
+  border-top: 1px solid var(--border);
+  margin-top: 6px;
+}
+/* JS 通过 .show class 直接控制显隐，优先级高于所有 sidebar 模式规则 */
+.search-results.show { display: block !important; }
 .search-results .summary {
   font-size: 12px;
   color: var(--muted);
@@ -389,6 +397,7 @@ img[data-loading="1"] {
 /* When search mode is active, hide the TOC listing */
 .sidebar[data-mode="search"] .toc { display: none; }
 .sidebar[data-mode="toc"] .search-results { display: none; }
+.sidebar[data-mode="search"] .search-results.show { display: block; }
 
 /* In-content highlight for the active search term */
 .content mark.search-hit {
@@ -776,7 +785,7 @@ System.out.print() : 输出数据之后，不会换行。
 <p>存在！</p>
 <p>不能举例。</p>
 <h4 id="5-java">5. 如何看待Java是一门半编译半解释型的语言（携*）</h4>
-<p><img alt="img" src="assets/images/image002.jpg" / loading="lazy" decoding="async" fetchpriority="low"></p>
+<p><img alt="img" src="assets/images/image002.jpg" loading="lazy" decoding="async" fetchpriority="low" /></p>
 <p><a id="第02章-变量与运算符"></a></p>
 </section>
 <section class="chapter" data-ch="3">
@@ -3431,9 +3440,9 @@ System.out.print() : 输出数据之后，不会换行。
 <li>了解：如何删除模块</li>
 </ul>
 <h4 id="4-jdk">4. 熟悉JDK的结构</h4>
-<p><img alt="image-20221115165103208" src="assets/images/image-20221115165103208.png" / loading="lazy" decoding="async" fetchpriority="low"></p>
-<p><img alt="image-20221115165123046" src="assets/images/image-20221115165123046.png" / loading="lazy" decoding="async" fetchpriority="low"></p>
-<p><img alt="image-20221115165138209" src="assets/images/image-20221115165138209.png" / loading="lazy" decoding="async" fetchpriority="low"></p>
+<p><img alt="image-20221115165103208" src="assets/images/image-20221115165103208.png" loading="lazy" decoding="async" fetchpriority="low" /></p>
+<p><img alt="image-20221115165123046" src="assets/images/image-20221115165123046.png" loading="lazy" decoding="async" fetchpriority="low" /></p>
+<p><img alt="image-20221115165138209" src="assets/images/image-20221115165138209.png" loading="lazy" decoding="async" fetchpriority="low" /></p>
 <h4 id="5">5. 详细的设置</h4>
 <p>略</p>
 <h4 id="6-debug">6. 代码模板、快捷键、调试程序（debug）</h4>
@@ -4386,7 +4395,7 @@ Thread类内部声明的三个常量：
 
 <p>线程的生命周期：</p>
 <p>jdk5.0之前：</p>
-<p><img alt="image-20221203142900528" src="assets/images/image-20221203142900528.png" / loading="lazy" decoding="async" fetchpriority="low"></p>
+<p><img alt="image-20221203142900528" src="assets/images/image-20221203142900528.png" loading="lazy" decoding="async" fetchpriority="low" /></p>
 <p>jdk5.0及之后：Thread类中定义了一个内部类State</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">State</span><span class="w"> </span><span class="p">{</span>
 
@@ -4404,7 +4413,7 @@ Thread类内部声明的三个常量：
 <span class="p">}</span>
 </code></pre></div>
 
-<p><img alt="image-20221203143046926" src="assets/images/image-20221203143046926.png" / loading="lazy" decoding="async" fetchpriority="low"></p>
+<p><img alt="image-20221203143046926" src="assets/images/image-20221203143046926.png" loading="lazy" decoding="async" fetchpriority="low" /></p>
 <h4 id="4_7">4. 如何解决线程安全问题(重点、难点)</h4>
 <ul>
 <li>
@@ -5397,7 +5406,7 @@ Collections：用于操作集合框架的一个工具类。此时的集合框架
 <p>作用：减少与磁盘的交互，进而提升读写效率。</p>
 <h4 id="23_3">2.3 转换流</h4>
 <h5 id="1_25">1. 字节流和字符流是什么？怎么转换？(北京蓝*、*海*供应链管理）</h5>
-<p><img alt="image-20221212161251100" src="assets/images/image-20221212161251100.png" / loading="lazy" decoding="async" fetchpriority="low"></p>
+<p><img alt="image-20221212161251100" src="assets/images/image-20221212161251100.png" loading="lazy" decoding="async" fetchpriority="low" /></p>
 <h4 id="24_6">2.4 序列化</h4>
 <h5 id="1-java_6">1. 什么是Java序列化，如何实现(君*科技、上海*厦物联网)</h5>
 <div class="codehilite"><pre><span></span><code>对象序列化机制允许把内存中的Java对象转换成平台无关的二进制流，从而允许把这种二进制流持久地保存在磁盘上，
@@ -5723,7 +5732,7 @@ System.out.println(per);
 &gt; 除了使用new创建对象之外，还可以用什么方法创建对象？(*云网络)
 </code></pre></div>
 
-<p><img alt="image-20221214145240412" src="assets/images/image-20221214145240412.png" / loading="lazy" decoding="async" fetchpriority="low"></p>
+<p><img alt="image-20221214145240412" src="assets/images/image-20221214145240412.png" loading="lazy" decoding="async" fetchpriority="low" /></p>
 <h5 id="2_25">2. 如何找到对象实际类的？（*度）</h5>
 <p>对象.getClass();</p>
 <div class="codehilite"><pre><span></span><code>Object obj = new Date();
@@ -6166,12 +6175,14 @@ obj.getClass();// 获取到的是Date。
   }
 
   /* ---------- Global content search ---------- */
-  // Build plain-text index lazily (one pass)
+  // Build plain-text index lazily (one pass).
+  // IMPORTANT: use textContent, not innerText. innerText returns "" for
+  // display:none elements, and all inactive chapters are display:none.
   function buildPlainIndex() {
     chapterInfo.forEach(info => {
       if (info.plain !== null) return;
-      // Use innerText to get rendered text without HTML tags; strip excessive whitespace
-      info.plain = info.el.innerText.replace(/\s+/g, ' ');
+      const raw = info.el.textContent || '';
+      info.plain = raw.replace(/\s+/g, ' ');
       info.plainLower = info.plain.toLowerCase();
     });
   }
@@ -6185,6 +6196,10 @@ obj.getClass();// 获取到的是Date。
     // Insert after .search inside sidebar
     const searchBox = sidebar.querySelector('.search');
     searchBox.insertAdjacentElement('afterend', resultsPanel);
+  }
+  // Helper: explicitly show/hide the results panel (don't rely on CSS alone)
+  function showResultsPanel(show) {
+    resultsPanel.classList.toggle('show', !!show);
   }
 
   // Add mode toggle (target: 目录 / 全文)
@@ -6205,10 +6220,14 @@ obj.getClass();// 获取到的是Date。
     if (!btn) return;
     scope = btn.dataset.scope;
     modeToggle.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
-    // Re-run current query
-    onSearchInput();
+    // Re-run current query against the (newly selected) scope
+    // searchInput may not be in scope here, so read via sidebar
+    const currentInput = sidebar.querySelector('#toc-search') || sidebar.querySelector('.search input');
+    if (currentInput) runSearch(currentInput);
     // Change placeholder
-    search.placeholder = scope === 'toc' ? '搜索目录...' : '全文检索（输入回车或至少 2 字）';
+    if (currentInput) {
+      currentInput.placeholder = scope === 'toc' ? '搜索目录...' : '全文检索（输入回车或至少 2 字）';
+    }
   });
 
   // Highlight text nodes inside an element with the given (lowercase) query.
@@ -6308,8 +6327,10 @@ obj.getClass();// 获取到的是Date。
 
   function contentSearch(q) {
     resultsPanel.innerHTML = '';
+    showResultsPanel(false);  // 默认隐藏，有结果时 JS 显式显示
     if (!q || q.length < 2) {
-      resultsPanel.innerHTML = '<div class="empty">输入至少 2 个字符开始全文检索</div>';
+      resultsPanel.innerHTML = '<div class=”empty”>输入至少 2 个字符开始全文检索</div>';
+      // 不显示结果面板 — 让 sidebar 保持在 toc 模式，避免用户看到空白
       return;
     }
     buildPlainIndex();
@@ -6331,7 +6352,8 @@ obj.getClass();// 获取到的是Date。
     const summary = document.createElement('div');
     summary.className = 'summary';
     if (hits.length === 0) {
-      resultsPanel.innerHTML = `<div class="empty">未找到 “${escapeHtml(q)}”</div>`;
+      resultsPanel.innerHTML = `<div class=”empty”>未找到 “${escapeHtml(q)}”</div>`;
+      showResultsPanel(true);  // 显示”未找到”提示
       return;
     }
     summary.innerHTML = `找到 <strong>${totalHits}</strong> 处匹配，分布在 <strong>${hits.length}</strong> 个章节。<br>点击结果加载对应章节。`;
@@ -6342,11 +6364,11 @@ obj.getClass();// 获取到的是Date。
       card.className = 'result';
       card.href = '#' + (h.info.el.querySelector('[id]')?.id || '');
       card.innerHTML = `
-        <div class="r-title">
+        <div class=”r-title”>
           <span>${escapeHtml(h.info.title)}</span>
-          <span class="r-count">${h.count} 处</span>
+          <span class=”r-count”>${h.count} 处</span>
         </div>
-        <div class="r-snip">${makeSnippet(h.info.plain, q, 40)}</div>
+        <div class=”r-snip”>${makeSnippet(h.info.plain, q, 40)}</div>
       `;
       card.addEventListener('click', (e) => {
         e.preventDefault();
@@ -6354,29 +6376,35 @@ obj.getClass();// 获取到的是Date。
       });
       resultsPanel.appendChild(card);
     }
+    showResultsPanel(true);  // 有结果时显示
   }
 
   function loadSearchResult(chapterIndex, query) {
     // Clear previous highlights in other chapters
     clearAllHighlights();
     setActiveChapter(chapterIndex, null, true);
-    // Highlight matches in this chapter, then jump to first
-    const ch = chapters[chapterIndex];
-    requestAnimationFrame(() => {
+    // Highlight matches in this chapter, then jump to first.
+    // Use a nested rAF so that the display change + the scroll rAF inside
+    // setActiveChapter both complete first; otherwise the highlight pass
+    // can race with layout and miss text nodes.
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const ch = chapters[chapterIndex];
       highlightIn(ch, query);
       const first = ch.querySelector('mark.search-hit');
       if (first) {
         first.classList.add('current');
         first.scrollIntoView({ block: 'center', behavior: 'auto' });
       }
-    });
+    }));
   }
 
-  const onSearchInput = () => {
-    const q = search.value.trim().toLowerCase();
+  const runSearch = (inputEl) => {
+    const q = (inputEl.value || '').trim();
     if (scope === 'toc') {
       setSidebarMode('toc');
-      tocFilter(q);
+      tocFilter(q.toLowerCase());
+      // Hide results panel when in TOC mode — JS is source of truth
+      showResultsPanel(false);
     } else {
       setSidebarMode('search');
       contentSearch(q);
@@ -6387,17 +6415,7 @@ obj.getClass();// 获取到的是Date。
   const newSearch = search.cloneNode(true);
   search.parentNode.replaceChild(newSearch, search);
   const searchInput = newSearch;
-  searchInput.addEventListener('input', debounce(() => {
-    // read from fresh reference
-    const q = searchInput.value.trim();
-    if (scope === 'toc') {
-      setSidebarMode('toc');
-      tocFilter(q.toLowerCase());
-    } else {
-      setSidebarMode('search');
-      contentSearch(q);
-    }
-  }, 220));
+  searchInput.addEventListener('input', debounce(() => runSearch(searchInput), 220));
   // Also pressing Enter with content-mode should force run immediately
   searchInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && scope === 'content') {
@@ -6408,6 +6426,7 @@ obj.getClass();// 获取到的是Date。
       setSidebarMode('toc');
       tocFilter('');
       resultsPanel.innerHTML = '';
+      showResultsPanel(false);
     }
   });
 
